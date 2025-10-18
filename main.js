@@ -1,90 +1,47 @@
-// main.js - Asegurate que este archivo esté en la raíz y subido a GitHub
-const productos = [
-  { nombre: "Reloj Rosa Minimalista", precio: 6500, imagen: "reloj1.jpg" },
-  { nombre: "Reloj Beige Minimalista", precio: 6500, imagen: "reloj2.jpg" },
-  { nombre: "Reloj Rojo Clásico", precio: 6000, imagen: "reloj3.jpg" },
-  { nombre: "Reloj Rosa Clásico", precio: 6000, imagen: "reloj4.jpg" },
-  { nombre: "Reloj Cuadrado Rosa", precio: 6500, imagen: "reloj5.jpg" },
-  { nombre: "Reloj Verde Minimalista", precio: 6500, imagen: "reloj6.jpg" },
-  { nombre: "Reloj Rosa Deportivo", precio: 6000, imagen: "reloj7.jpg" },
-  { nombre: "Reloj Violeta Clásico", precio: 6000, imagen: "reloj8.jpg" },
-  { nombre: "Reloj Cuadrado Moderno", precio: 6500, imagen: "reloj9.jpg" },
-];
+const cart = [];
+const cartCount = document.getElementById('cart-count');
+const cartModal = document.getElementById('cart-modal');
+const cartItems = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+const checkoutBtn = document.getElementById('checkout-btn');
 
-let carrito = [];
-
-function formatoPesos(n){ return n.toLocaleString('es-AR'); }
-
-function mostrarProductos(){
-  const cont = document.getElementById('productos');
-  cont.innerHTML = '';
-  productos.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = 'producto';
-    card.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}" />
-      <h3>${p.nombre}</h3>
-      <p class="precio">$${formatoPesos(p.precio)}</p>
-      <button onclick="agregarAlCarrito(${i})">Agregar al carrito</button>
-    `;
-    cont.appendChild(card);
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const product = e.target.closest('.product');
+    const id = product.dataset.id;
+    const title = product.dataset.title;
+    const price = parseFloat(product.dataset.price);
+    cart.push({ id, title, price });
+    updateCart();
   });
-}
+});
 
-function agregarAlCarrito(idx){
-  carrito.push(productos[idx]);
-  mostrarCarrito();
-}
-
-function mostrarCarrito(){
-  const lista = document.getElementById('carrito-contenido');
-  lista.innerHTML = '';
-  if(carrito.length === 0){
-    lista.innerHTML = '<li>Tu carrito está vacío.</li>';
-    document.getElementById('total').textContent = '0';
-    return;
-  }
+function updateCart() {
+  cartItems.innerHTML = '';
   let total = 0;
-  carrito.forEach((it, idx) => {
+  cart.forEach(item => {
     const li = document.createElement('li');
-    li.innerHTML = `${it.nombre} - $${formatoPesos(it.precio)} <button class="eliminar" onclick="eliminarDelCarrito(${idx})">❌</button>`;
-    lista.appendChild(li);
-    total += it.precio;
+    li.textContent = `${item.title} - $${item.price}`;
+    cartItems.appendChild(li);
+    total += item.price;
   });
-  document.getElementById('total').textContent = formatoPesos(total);
+  cartTotal.textContent = total.toFixed(2);
+  cartCount.textContent = cart.length;
 }
 
-function eliminarDelCarrito(index){
-  carrito.splice(index,1);
-  mostrarCarrito();
-}
+document.getElementById('cart-icon').onclick = () => cartModal.classList.remove('hidden');
+document.getElementById('close-cart').onclick = () => cartModal.classList.add('hidden');
 
-function vaciarCarrito(){
-  carrito = [];
-  mostrarCarrito();
-}
-
-function comprar(){
-  if(carrito.length === 0){ alert('El carrito está vacío'); return; }
-  const itemsText = carrito.map(i => `${i.nombre} - $${formatoPesos(i.precio)}`).join('%0A');
-  const total = carrito.reduce((s,i)=>s+i.precio,0);
-  const texto = encodeURIComponent(`Hola, quiero comprar:%0A${itemsText}%0A%0ATotal: $${formatoPesos(total)}%0A`);
-  // número sin espacios; +54 antes del 11 (número que diste)
-  window.open(`https://wa.me/541121728945?text=${texto}`, '_blank');
-}
-
-// Toggle carrito
-document.getElementById('carrito-toggle').addEventListener('click', ()=>{
-  const c = document.getElementById('carrito');
-  c.classList.toggle('mostrar');
-  c.classList.toggle('oculto');
+checkoutBtn.addEventListener('click', async () => {
+  const response = await fetch("https://tu-backend.onrender.com/create_preference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: cart })
+  });
+  const data = await response.json();
+  const mp = new MercadoPago("TU_PUBLIC_KEY", { locale: "es-AR" });
+  mp.checkout({
+    preference: { id: data.id },
+    autoOpen: true,
+  });
 });
-
-// botones vaciar/comprar
-document.addEventListener('click', e=>{
-  if(e.target && e.target.id === 'vaciar-btn') vaciarCarrito();
-  if(e.target && e.target.id === 'comprar-btn') comprar();
-});
-
-mostrarProductos();
-mostrarCarrito();

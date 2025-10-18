@@ -1,185 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Boutique</title>
-  <link rel="stylesheet" href="estilo.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('fondo.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-    }
-
-    header {
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 30px;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .carrito-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .productos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px;
-    }
-
-    .producto {
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-    }
-
-    .producto img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .producto button {
-      margin-top: 10px;
-      padding: 8px 15px;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .carrito {
-      display: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 400px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.95);
-      padding: 20px;
-      overflow-y: auto;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .carrito h2 {
-      margin-top: 0;
-    }
-
-    .cerrar-carrito {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-    }
-
-    .comprar-btn {
-      background-color: #00e676;
-      color: black;
-      border: none;
-      padding: 10px 15px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <header>
-    <div class="logo">🛍️ La Boutique</div>
-    <button class="carrito-btn" onclick="abrirCarrito()">🛒</button>
+    <h1>🛍️ La Boutique</h1>
+    <div id="carrito-icono" onclick="mostrarOcultarCarrito()">🛒</div>
   </header>
 
-  <section class="productos" id="productos">
-    <div class="producto">
-      <img src="reloj1.jpg" alt="Reloj 1">
-      <h3>Reloj Elegante</h3>
-      <p>$15.000</p>
-      <button onclick="agregarAlCarrito('Reloj Elegante', 15000)">Agregar al carrito</button>
-    </div>
-    <div class="producto">
-      <img src="reloj2.jpg" alt="Reloj 2">
-      <h3>Reloj Dorado</h3>
-      <p>$18.000</p>
-      <button onclick="agregarAlCarrito('Reloj Dorado', 18000)">Agregar al carrito</button>
-    </div>
-    <div class="producto">
-      <img src="reloj3.jpg" alt="Reloj 3">
-      <h3>Reloj Plateado</h3>
-      <p>$20.000</p>
-      <button onclick="agregarAlCarrito('Reloj Plateado', 20000)">Agregar al carrito</button>
-    </div>
-  </section>
+  <main>
+    <div id="productos" class="contenedor-productos"></div>
+  </main>
 
-  <div class="carrito" id="carrito">
-    <button class="cerrar-carrito" onclick="cerrarCarrito()">✖</button>
-    <h2>🛒 Tu Carrito</h2>
-    <ul id="listaCarrito"></ul>
-    <p><strong>Total:</strong> $<span id="total">0</span></p>
-    <p style="color: #ccc;">📦 El envío puede tener un costo adicional</p>
-    <button class="comprar-btn" onclick="comprar()">Comprar</button>
+  <div id="carrito" class="carrito oculto">
+    <h2>Tu Carrito</h2>
+    <ul id="carrito-contenido"></ul>
+    <button id="btn-comprar" onclick="comprar()">Comprar</button>
   </div>
 
-  <script>
-    const carrito = [];
-    const carritoDiv = document.getElementById('carrito');
-    const listaCarrito = document.getElementById('listaCarrito');
-    const totalEl = document.getElementById('total');
-
-    function agregarAlCarrito(nombre, precio) {
-      carrito.push({ nombre, precio });
-      actualizarCarrito();
-    }
-
-    function actualizarCarrito() {
-      listaCarrito.innerHTML = '';
-      let total = 0;
-      carrito.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.nombre} - $${item.precio}`;
-        listaCarrito.appendChild(li);
-        total += item.precio;
-      });
-      totalEl.textContent = total;
-    }
-
-    function abrirCarrito() {
-      carritoDiv.style.display = 'block';
-    }
-
-    function cerrarCarrito() {
-      carritoDiv.style.display = 'none';
-    }
-
-    function comprar() {
-      const numero = "1121728945";
-      const mensaje = encodeURIComponent("¡Hola! Quiero hacer una compra desde La Boutique.");
-      window.open(`https://wa.me/54${numero}?text=${mensaje}`, '_blank');
-    }
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>

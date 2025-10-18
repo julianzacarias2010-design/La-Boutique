@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Boutique - Relojes</title>
+  <style>
+    /* ====== Estilos base ====== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #fafafa, #eaeaea);
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: #fff;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 0.3rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .verified {
+      color: #009944;
+      font-weight: 600;
+    }
+
+    /* ====== Contenido principal ====== */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .reloj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .reloj {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .reloj:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .reloj img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .reloj-content {
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .reloj h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #111;
+    }
+
+    .reloj p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .precio {
+      margin-top: 0.8rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .whatsapp-btn {
+      display: block;
+      width: 85%;
+      margin: 1rem auto 1.2rem;
+      text-align: center;
+      padding: 0.7rem 1rem;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #1ebe57;
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      background-color: #fff;
+      box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🕰️ La Boutique</h1>
+    <p>Venta de relojes elegantes y modernos | Moneda: ARS 🇦🇷</p>
+    <p>📞 Contacto: 1121728945 | <span class="verified">Página verificada ✅</span></p>
+  </header>
+
+  <main>
+    <div class="reloj-grid">
+      <div class="reloj">
+        <img src="img/reloj1.jpg" alt="Reloj Rosa Minimalista">
+        <div class="reloj-content">
+          <h2>Reloj Rosa Minimalista</h2>
+          <p>Diseño delicado y moderno, ideal para uso diario.</p>
+          <p class="precio">$6.500</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Rosa%20Minimalista%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj2.jpg" alt="Reloj Beige Minimalista">
+        <div class="reloj-content">
+          <h2>Reloj Beige Minimalista</h2>
+          <p>Estilo clásico con detalles dorados, cómodo y versátil.</p>
+          <p class="precio">$6.500</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Beige%20Minimalista%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj3.jpg" alt="Reloj Rojo Clásico">
+        <div class="reloj-content">
+          <h2>Reloj Rojo Clásico</h2>
+          <p>Correa de silicona y diseño llamativo, ideal para destacar.</p>
+          <p class="precio">$6.000</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Rojo%20Clásico%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj4.jpg" alt="Reloj Rosa Clásico">
+        <div class="reloj-content">
+          <h2>Reloj Rosa Clásico</h2>
+          <p>Elegante y casual, con correa de silicona resistente.</p>
+          <p class="precio">$6.000</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Rosa%20Clásico%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj5.jpg" alt="Reloj Cuadrado Rosa">
+        <div class="reloj-content">
+          <h2>Reloj Cuadrado Rosa</h2>
+          <p>Diseño minimalista con caja cuadrada, moderno y sutil.</p>
+          <p class="precio">$6.500</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Cuadrado%20Rosa%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj6.jpg" alt="Reloj Verde Minimalista">
+        <div class="reloj-content">
+          <h2>Reloj Verde Minimalista</h2>
+          <p>Fresco y elegante, ideal para un look relajado.</p>
+          <p class="precio">$6.500</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Verde%20Minimalista%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj7.jpg" alt="Reloj Rosa Deportivo">
+        <div class="reloj-content">
+          <h2>Reloj Rosa Deportivo</h2>
+          <p>Estilo deportivo con esfera grande y correa suave.</p>
+          <p class="precio">$6.000</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Rosa%20Deportivo%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="reloj">
+        <img src="img/reloj8.jpg" alt="Reloj Violeta Clásico">
+        <div class="reloj-content">
+          <h2>Reloj Violeta Clásico</h2>
+          <p>Color vibrante y diseño casual, ideal para todos los días.</p>
+          <p class="precio">$6.000</p>
+          <a class="whatsapp-btn" href="https://wa.me/541121728945?text=Hola!%20Quiero%20comprar%20el%20Reloj%20Violeta%20Clásico%20de%20La%20Boutique." target="_blank">Comprar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 La Boutique. Todos los derechos reservados.
+  </footer>
+</body>
+</html>

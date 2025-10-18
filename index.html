@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>La Boutique</title>
   <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <header>
-    <h1>🛍️ La Boutique</h1>
-    <div id="carrito-icono" onclick="mostrarOcultarCarrito()">🛒</div>
+    <h1>La Boutique</h1>
+    <button id="carrito-toggle" aria-label="Abrir carrito">🛒</button>
   </header>
 
   <main>
-    <div id="productos" class="contenedor-productos"></div>
+    <section id="productos" class="contenedor-productos"></section>
   </main>
 
-  <div id="carrito" class="carrito oculto">
+  <aside id="carrito" class="carrito oculto" aria-hidden="true">
     <h2>Tu Carrito</h2>
     <ul id="carrito-contenido"></ul>
-    <button id="btn-comprar" onclick="comprar()">Comprar</button>
-  </div>
+    <p id="total-line"><strong>Total:</strong> $<span id="total">0</span></p>
+    <p class="envio-aviso">📦 El envío puede tener un costo adicional</p>
+    <div class="carrito-actions">
+      <button id="vaciar-btn">Vaciar</button>
+      <button id="comprar-btn">Comprar (WhatsApp)</button>
+    </div>
+  </aside>
 
   <script src="main.js"></script>
 </body>
